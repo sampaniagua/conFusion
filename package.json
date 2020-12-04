@@ -8,15 +8,28 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lite": "lite-server",
     "scss": "node-sass -o css/ css/",
-    "watch:all": "onchange css/*.scss && npm run scss && npm run lite"
+    "watch:all": "onchange css/*.scss && npm run scss && npm run lite",
+    "clean": "rimraf build",
+    "copyfonts": "copyfiles -f node_modules/font-awesome/fonts/* build/fonts",
+    "copyimg": "copyfiles -f img/* build/img",
+    "copysite": "copyfiles -f *.html build/",
+    "imagemin": "imagemin img/* -o build/img",
+    "build": "npm run copyfonts && npm run copyimg && npm run usemin",
+    "usemin": "usemin contactus.html -d dist --htmlmin -o build/contactus.html && usemin aboutus.html -d build --htmlmin -o build/aboutus.html && usemin index.html -d build --htmlmin -o build/index.html"
+    
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "cssmin": "^0.4.3",
+    "htmlmin": "0.0.7",
     "lite-server": "^2.3.0",
     "node-sass": "^5.0.0",
     "onchange": "^7.1.0",
-    "parallelshell": "^3.0.2"
+    "parallelshell": "^3.0.2",
+    "rimraf": "^3.0.2",
+    "uglifyjs": "^2.4.11",
+    "usemin-cli": "^0.6.0"
   },
   "dependencies": {
     "bootstrap": "^4.5.3",
